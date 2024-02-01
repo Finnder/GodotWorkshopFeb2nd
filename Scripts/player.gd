@@ -12,6 +12,9 @@ func _physics_process(delta):
 	velocity.y += GRAVITY * delta
 	move_and_slide()
 
-	# Rotate the bird based on its velocity
+	# Rotate the player based on its velocity
 	rotation = lerp(rotation, velocity.y / 1000, 0.1)
 
+func _on_area_2d_body_entered(body):
+	if (body.name == "Obstacles"):
+		get_parent().get_tree().reload_current_scene()

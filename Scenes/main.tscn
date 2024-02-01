@@ -1,12 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://cvcqohtfecmwb"]
+[gd_scene load_steps=3 format=3 uid="uid://hbtvjn1hg26f"]
 
-[ext_resource type="PackedScene" uid="uid://jhxu4gktfm36" path="res://Scenes/player.tscn" id="1_lxmj1"]
+[ext_resource type="PackedScene" uid="uid://jhxu4gktfm36" path="res://Scenes/player.tscn" id="1_guea0"]
+[ext_resource type="Script" path="res://Scripts/ObstacleSpawner.gd" id="2_1ylpl"]
 
 [node name="Main" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(650, 71)
-zoom = Vector2(0.7, 0.7)
+position = Vector2(576, 323)
 
-[node name="Player" parent="." instance=ExtResource("1_lxmj1")]
-position = Vector2(238, 0)
+[node name="Player" parent="." instance=ExtResource("1_guea0")]
+position = Vector2(150, 300)
+
+[node name="ObstacleSpawner" type="Node" parent="."]
+script = ExtResource("2_1ylpl")
+
+[node name="Timer" type="Timer" parent="ObstacleSpawner"]
+wait_time = 3.0
+autostart = true
+
+[node name="ObstacleSpawnPosition" type="Node2D" parent="ObstacleSpawner"]
+position = Vector2(620, 325)
+
+[connection signal="timeout" from="ObstacleSpawner/Timer" to="ObstacleSpawner" method="_on_timer_timeout"]
